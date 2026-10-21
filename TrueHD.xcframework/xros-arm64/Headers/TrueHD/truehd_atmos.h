@@ -443,7 +443,8 @@ TrueHDAtmosStatus truehd_atmos_decoder_set_bed_companion(TrueHDAtmosDecoder *dec
  * every primitive matrix holds the coefficients last transmitted until the next update. The
  * decode is then no longer bit-exact on a stream that interpolates (object presentations
  * typically do). Off after create(). Applies to the access units parsed from the next call on;
- * reset() keeps the setting.
+ * reset() keeps the setting. Disabling ignore returns TRUEHD_ATMOS_ERR_INVALID_ARGUMENT
+ * if this binary was built without matrix-interpolation; callers must check the result.
  */
 TrueHDAtmosStatus truehd_atmos_decoder_set_ignore_interpolation(TrueHDAtmosDecoder *decoder,
                                                                 bool ignore);

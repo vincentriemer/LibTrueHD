@@ -1,0 +1,19 @@
+{
+  "base": "aebd5ffe1046dadbea833ce87a75d00fd8b1edd1",
+  "truehd": "33bae1657ceb25b5fe0347f42c544c3414e2760e",
+  "rust": "1.98.1",
+  "xcode": "27.1 (27A9269)",
+  "command": "./build.sh",
+  "defaultFeatures": [
+    "matrix-interpolation"
+  ],
+  "artifactsSHA256": {
+    "TrueHD.xcframework/ios-arm64/libtruehd_atmos.a": "6516c97c381122d8cfdfe8cacfb9fceaa9cc6638ad3ed8a050210a4b6a8c2dbe",
+    "TrueHD.xcframework/ios-arm64_x86_64-simulator/libtruehd_atmos.a": "ad52e7039a969062ecfafb35931cbf0bab2b2aa42395c500f39f7d01ebad597e",
+    "TrueHD.xcframework/macos-arm64_x86_64/libtruehd_atmos.a": "caf359276c059fb69ec7bf9c775b6327d193de7df89de44b89662b30f67fc9ce",
+    "TrueHD.xcframework/tvos-arm64/libtruehd_atmos.a": "3e48e9fa60a0e918fd5cb6e34fe6ab41f24ed2f1665db2bae72e4701f2335bca",
+    "TrueHD.xcframework/tvos-arm64-simulator/libtruehd_atmos.a": "a94189864ddf8a9cdffcac8232637725e74f04201b75c96c23ae9d6a4d8999d3",
+    "TrueHD.xcframework/xros-arm64/libtruehd_atmos.a": "a8b98b2a494dd8385a3586f1e1dd47d040f68c4c38f77358569525fa897a6fc1",
+    "TrueHD.xcframework/xros-arm64-simulator/libtruehd_atmos.a": "b9edf04895898e0bbfa08020957f52b3395e9a5fe88ae314d0970fb7020e1aeb"
+  }
+}

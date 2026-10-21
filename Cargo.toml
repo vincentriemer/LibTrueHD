@@ -23,11 +23,9 @@ crate-type = ["staticlib", "rlib"]
 truehd = { git = "https://github.com/superuser404notfound/truehdd", rev = "33bae1657ceb25b5fe0347f42c544c3414e2760e", default-features = false }
 
 [features]
-# Off by default: the library then reads a stream's matrix interpolation values and discards them,
-# and the interpolating decode is not compiled in. Object presentations of streams that interpolate
-# no longer decode bit-exactly; channel-based presentations carry no interpolation and are exact
-# either way. On for measurement builds that need the exact decode (build.sh and verify.sh take
-# TRUEHD_ATMOS_FEATURES=matrix-interpolation).
+default = ["matrix-interpolation"]
+# Exact object decoding is the production default. A no-default-features build must refuse
+# requests for interpolation instead of silently accepting an approximate decode.
 matrix-interpolation = ["truehd/matrix-interpolation"]
 
 [profile.release]

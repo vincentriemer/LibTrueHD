@@ -186,6 +186,9 @@ pub unsafe extern "C" fn truehd_atmos_decoder_set_ignore_interpolation(
     decoder: *mut TrueHDAtmosDecoder,
     ignore: bool,
 ) -> Status {
+    if !ignore && !cfg!(feature = "matrix-interpolation") {
+        return ERR_INVALID_ARGUMENT;
+    }
     with_engine(decoder, false, |engine| {
         engine.set_ignore_interpolation(ignore);
         OK
