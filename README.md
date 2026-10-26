@@ -26,7 +26,7 @@ the old product name.
 ## Use
 
 ```swift
-.package(url: "https://github.com/superuser404notfound/LibTrueHD", .upToNextMinor(from: "3.0.0")),
+.package(url: "https://github.com/superuser404notfound/LibTrueHD", .upToNextMinor(from: "3.1.0")),
 // target dependency:
 .product(name: "TrueHD", package: "LibTrueHD"),
 ```
@@ -61,14 +61,12 @@ Two per-handle options, both off after `create()` and kept across `reset()`:
   are read and discarded, so each matrix holds its last transmitted coefficients until the next
   update. Not bit-exact on streams that interpolate.
 
-This fork enables the `matrix-interpolation` Cargo feature by default and rebuilds every Apple
-slice with exact object decoding. A deliberate `--no-default-features` build remains possible,
-but `truehd_atmos_decoder_set_ignore_interpolation(decoder, false)` then returns
-`TRUEHD_ATMOS_ERR_INVALID_ARGUMENT`. Consumers must check that status rather than silently
-accept approximate decoding. `harness/verify.sh` can compare decoded PCM against exact truehdd.
-
-Modified October 20, 2026 for ATVPlayer: exact decoding by default, fail-closed capability check,
-and regression tests with and without the feature. The pinned truehdd source and C ABI are unchanged.
+The shipped library decodes exactly, matrix interpolation included (the `matrix-interpolation`
+Cargo feature, on by default). `TRUEHD_ATMOS_NO_INTERPOLATION=1 ./build.sh` builds it without: the
+interpolating decode is then not compiled in at all and every handle behaves as if
+`set_ignore_interpolation` were on. Channel-based presentations carry no interpolation and stay
+bit-exact; an object presentation that interpolates decodes approximately. `harness/verify.sh`
+takes the same variable and checks each build against a truehdd built the same way.
 
 [`include/truehd_atmos.h`](include/truehd_atmos.h) is the reference: ownership, threading,
 coordinates (OAMD room coordinates, x left→right, y front→back, z floor −1 / ear level 0 /
@@ -127,3 +125,7 @@ both files with it.
 
 Dolby, Dolby Atmos and Dolby TrueHD are trademarks of Dolby Laboratories. This project is not
 affiliated with or endorsed by Dolby Laboratories.
+
+## ATVPlayer fork safeguard
+
+Based on upstream 3.1.0. Interpolation defaults and build switches come from upstream. The retained local change rejects `set_ignore_interpolation(false)` when interpolation was not compiled in, allowing callers to fail closed. Capability tests exercise both configurations; `BUILD-PROVENANCE.json` records rebuilt Apple slices.
